@@ -4,6 +4,7 @@ import string
 import time
 filtered_files=os.listdir('img')
 g = len(filtered_files)
+
 def rand():
     for filename in os.listdir('img'):
         os.rename(f'{"img"}/{filename}',f'{"img"}/{''.join(random.choice(string.ascii_letters + string.digits) for i in range(10))}.{'jpg'}')

@@ -7,6 +7,7 @@ from tqdm import  tqdm
 cfg = open("config.txt", "a+")
 cfg.seek(0)
 
+
 def scan():
 
 
@@ -32,8 +33,8 @@ def scan():
 
 
 if os.stat("config.txt").st_size ==0 :
-    print('Введите путь до файла tesseract.exe.')
-    print('Обычно он C:\Program Files\Tesseract-OCR\ ')
+    print('Введите путь до файла tesseract.exe')
+    print('Обычно он C:\Program Files\Tesseract-OCR\Tesseract.exe ')
     OCR_path=str(input())
     cfg.write(OCR_path)
     cfg.close()
@@ -48,14 +49,14 @@ filtered_files=os.listdir('img')
 g = os.listdir('img')
 print(len(g))
 print('Сортировать? ')
-print('Y/n')
+print('ДА/НЕТ')
 ask = input()
-if ask == 'Y':
+if ask == 'ДА':
     sort.rand()
     sort.so()
     scan()
 
-elif ask == 'n':
+elif ask == 'НЕТ':
     scan()
 
 
