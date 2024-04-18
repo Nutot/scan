@@ -5,12 +5,21 @@ import sort
 from tqdm import trange
 from tqdm import  tqdm
 cfg = open("config.txt", "a+")
+
 cfg.seek(0)
 
 
+def check():
+    OCR_path = str(input())
+
+    if OCR_path[-13:] != "tesseract.exe" and os.path.isfile(OCR_path) == True:
+        cfg.write(OCR_path)
+    else:
+        while OCR_path[-13:] != "tesseract.exe" and os.path.isfile(OCR_path) == False:
+            print("Недействительный путь!")
+            OCR_path = str(input())
+        cfg.write((OCR_path))
 def scan():
-
-
     file = open("test.txt", "w+")
     for c in trange(1,len(filtered_files)):
         file_path = str(c)
@@ -34,15 +43,22 @@ def scan():
 
 if os.stat("config.txt").st_size ==0 :
     print('Введите путь до файла tesseract.exe')
-    print('Обычно он C:\Program Files\Tesseract-OCR\Tesseract.exe ')
-    OCR_path=str(input())
-    cfg.write(OCR_path)
+    print('Обычно он C:\Program Files\Tesseract-OCR\... ')
+
+    check()
+
     cfg.close()
 else:
     cfg.seek(0)
-    OCR_path = cfg.read()
-    cfg.close()
-    print(OCR_path)
+
+    if cfg.read()[-13:] == 'tesseract.exe':
+        cfg.close()
+    else:
+        open("config.txt", 'w')
+        print('Файл config.txt поврежден.')
+        print('Введите путь к файлу tesseract.exe')
+        check()
+
 s = []
 f = 0
 filtered_files=os.listdir('img')
@@ -64,4 +80,3 @@ tqdm.write('done')
 print('Created by Nutot')
 while s != '':
     s = input()
-
